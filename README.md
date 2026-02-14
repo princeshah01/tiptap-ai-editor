@@ -4,45 +4,119 @@ A reusable TipTap-powered editor template packaged with tsup. React is kept as a
 
 ## Install
 
+Since this is a private repository, you need to install it via git.
+
+### Option 1: SSH (Recommended)
+
 ```bash
-npm install tip-tap-source
-# or: pnpm add tip-tap-source
+npm install git+ssh://git@github.com/princeshah01/tiptap-ai-editor.git
+# OR for yarn
+yarn add git+ssh://git@github.com/princeshah01/tiptap-ai-editor.git
+# OR for pnpm
+pnpm add git+ssh://git@github.com/princeshah01/tiptap-ai-editor.git
 ```
 
-Import the styles once in your app entry:
+### Option 2: HTTPS
+
+```bash
+npm install git+https://github.com/princeshah01/tiptap-ai-editor.git
+```
+
+## Setup
+
+Import the styles once in your app entry (e.g., `main.tsx`, `App.tsx`, or `layout.tsx`):
 
 ```ts
-import "tip-tap-source/style.css"
+import "tip-tap-source/style.css";
 ```
 
-## Quick start
+## Usage
+
+Here is a complete example showing how to use the `SimpleEditor` for input and `SimpleRenderer` for displaying content.
 
 ```tsx
-import { SimpleEditor } from "tip-tap-source"
-import "tip-tap-source/style.css"
+import { useState } from "react";
+import { SimpleEditor } from "tip-tap-source";
+import { SimpleRenderer } from "tip-tap-source";
+import type { JSONContent } from "@tiptap/core";
+import "tip-tap-source/style.css"; // Ensure styles are imported
 
-export default function Example() {
+export default function App() {
+  const [jsonContent, setJsonContent] = useState<JSONContent | null>(null);
+
   return (
-    <SimpleEditor
-      initialContent="<p>Hello world</p>"
-      onUpdate={({ editor }) => {
-        console.log(editor.getJSON())
-      }}
-      onImageUpload={async (file) => {
-        // Replace with your upload target
-        return URL.createObjectURL(file)
-      }}
-    />
-  )
+    <div
+      style={{ display: "flex", gap: "2rem", height: "100vh", padding: "2rem" }}
+    >
+      {/* Editor Section */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <h3>Editor</h3>
+        <div
+          style={{
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            overflow: "hidden",
+            flex: 1,
+          }}
+        >
+          <SimpleEditor
+            aiImproveMaxLength={100}
+            onAiImprove={(selectedText) => {
+              console.log("AI Improve requested for:", selectedText);
+              // Implement your AI call here and return the improved text
+              return Promise.resolve(selectedText + " (AI Improved)");
+            }}
+            onUpdate={({ editor }) => {
+              setJsonContent(editor.getJSON());
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Renderer/Preview Section */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <h3>Preview (Renderer)</h3>
+        <div
+          style={{
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            padding: "1rem",
+            flex: 1,
+            overflow: "auto",
+          }}
+        >
+          {jsonContent ? (
+            <SimpleRenderer content={jsonContent} />
+          ) : (
+            <p style={{ color: "#888" }}>
+              Start typing in the editor to see the preview...
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 ```
 
-## Props
+## Component Props
 
-- `initialContent` – optional TipTap `Content`; defaults to the bundled demo JSON
-- `onUpdate` – callback fired on editor updates with the active editor instance
-- `onImageUpload` – custom uploader; defaults to a safe in-browser data URL implementation
-- `className` – optional class passed to the root wrapper
+### `SimpleEditor`
+
+| Prop | Type | Description |
+|Data | --- | --- |
+| `initialContent` | `JSONContent` \| `string` | Initial content for the editor. |
+| `onUpdate` | `(props: { editor: Editor }) => void` | Callback fired when editor content changes. |
+| `onAiImprove` | `(text: string) => Promise<string>` | Callback for AI text improvement features. |
+| `aiImproveMaxLength` | `number` | Max length for AI improvement input. |
+| `className` | `string` | Optional class for the root wrapper. |
+
+### `SimpleRenderer`
+
+| Prop        | Type          | Description                          |
+| ----------- | ------------- | ------------------------------------ |
+| `content`   | `JSONContent` | The JSON content to render.          |
+| `className` | `string`      | Optional class for the root wrapper. |
 
 ## Commands
 
