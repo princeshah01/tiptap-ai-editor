@@ -1,0 +1,53 @@
+@import "./styles/_keyframe-animations.scss";
+@import "./styles/_variables.scss";
+
+.half-width {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* Root wrapper */
+.app-root {
+  position: relative;
+  height: 100%;
+}
+
+/* Main layout */
+.app-main {
+  position: absolute;
+  inset: 0;
+  padding-top: 5.25rem; /* pt-21 ≈ 84px */
+}
+
+/* Large screens (lg) */
+@media (min-width: 1024px) {
+  .app-main {
+    left: 14rem; /* lg:left-56 */
+    padding-top: 4rem; /* lg:pt-16 */
+  }
+}
+
+/* Inner container */
+.app-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Large screens (lg) */
+@media (min-width: 1024px) {
+  .app-container {
+    width: calc(100vw - 30rem);
+  }
+}
+
+/* Extra large screens (xl) */
+@media (min-width: 1280px) {
+  .app-container {
+    width: calc(100vw - 34rem);
+    padding-left: 5rem; /* xl:px-20 */
+    padding-right: 5rem;
+  }
+}

@@ -1,0 +1,51 @@
+.simple-renderer.tiptap.ProseMirror {
+  --tt-toolbar-height: 44px;
+  --tt-theme-text: var(--tt-gray-light-900);
+  --tt-bg-color: var(--white);
+
+  .dark & {
+    --tt-theme-text: var(--tt-gray-dark-900);
+    --tt-bg-color: var(--black);
+  }
+
+  font-family: "DM Sans", sans-serif;
+  color: var(--tt-theme-text);
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 3rem 3rem 30vh; /* Match editor padding */
+
+  @media screen and (max-width: 480px) {
+    padding: 1rem 1.5rem 30vh;
+  }
+
+  /* Links */
+  a {
+    color: var(--tt-link-color, #2563eb);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  /* Task list */
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+
+      label {
+        flex-shrink: 0;
+      }
+    }
+  }
+}
