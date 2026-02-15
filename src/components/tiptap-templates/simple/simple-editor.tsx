@@ -489,12 +489,12 @@ function AiImproveBubble({
           gradientTransform="matrix(128.602 652.9562 653.274 -128.6646 -316906.281 517189.719)"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#1ba1e3" />
-          <stop offset="0" stop-color="#1ba1e3" />
-          <stop offset=".3" stop-color="#5489d6" />
-          <stop offset=".545" stop-color="#9b72cb" />
-          <stop offset=".825" stop-color="#d96570" />
-          <stop offset="1" stop-color="#f49c46" />
+          <stop offset="0" stopColor="#1ba1e3" />
+          <stop offset="0" stopColor="#1ba1e3" />
+          <stop offset=".3" stopColor="#5489d6" />
+          <stop offset=".545" stopColor="#9b72cb" />
+          <stop offset=".825" stopColor="#d96570" />
+          <stop offset="1" stopColor="#f49c46" />
         </radialGradient>
         <path
           fill="url(#oDvWy9qKGfkbPZViUk7TCb)"
