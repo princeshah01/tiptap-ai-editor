@@ -81,8 +81,6 @@ import "@/styles/_keyframe-animations.scss";
 import "@/styles/_variables.scss";
 import "@/components/tiptap-templates/simple/simple-editor.scss";
 
-import defaultContent from "@/components/tiptap-templates/simple/data/content.json";
-
 export type SimpleEditorStyles = {
   /** Style for the root wrapper div */
   root?: React.CSSProperties;
@@ -279,7 +277,7 @@ export function SimpleEditor({
         onError: (error) => console.error("Upload failed:", error),
       }),
     ],
-    content: initialContent ?? (defaultContent as Content),
+    content: initialContent,
     onUpdate: onUpdate
       ? ({ editor }) => {
           onUpdate({ editor });
